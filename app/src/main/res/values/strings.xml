@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Syniji Zim converter .MD</string>
+    <string name="app_subtitle">Conversor Offline ZIM para Markdown Textual</string>
+    <string name="select_zim_file">Selecionar Arquivo ZIM</string>
+    <string name="nav_home">Início</string>
+    <string name="nav_library">Biblioteca</string>
+    <string name="nav_search">Pesquisa</string>
+    <string name="nav_history">Histórico</string>
+    <string name="nav_settings">Configurações</string>
+    <string name="offline_badge">100% Local &amp; Offline</string>
+    <string name="no_media_rule">Modo Exclusivamente Textual: Nenhuma mídia binária é extraída ou exportada.</string>
+</resources>

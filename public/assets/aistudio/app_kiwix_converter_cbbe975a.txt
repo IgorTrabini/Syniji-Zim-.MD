@@ -1,0 +1,1434 @@
+PROJETO: ZIM TEXT CONVERTER
+
+Conversor profissional de arquivos Kiwix/ZIM para bibliotecas Markdown exclusivamente textuais
+
+1. VISÃO GERAL DO PROJETO
+
+Desenvolva um aplicativo profissional, completo e funcional, especializado em converter arquivos ".zim" da plataforma Kiwix/OpenZIM para o formato Markdown ".md", preservando integralmente, dentro das possibilidades técnicas, o conteúdo textual, a organização, os metadados, os links internos, os redirecionamentos e a estrutura lógica das bibliotecas originais.
+
+O aplicativo deverá ser projetado especificamente para criar bibliotecas de conhecimento exclusivamente textuais.
+
+REGRA ABSOLUTA: NÃO EXTRAIR, NÃO COPIAR E NÃO EXPORTAR ARQUIVOS DE MÍDIA.
+
+O resultado da conversão deverá conter somente documentos de texto Markdown.
+
+Não exportar:
+
+- Fotografias.
+- Imagens.
+- Ilustrações.
+- Diagramas gráficos.
+- Vídeos.
+- Áudios.
+- Animações.
+- Miniaturas.
+- Ícones.
+- Arquivos SVG.
+- Fontes.
+- CSS.
+- JavaScript.
+- Arquivos binários.
+- Recursos gráficos auxiliares.
+
+O foco é converter o conhecimento armazenado nos arquivos ZIM em uma biblioteca leve, organizada, portátil, fácil de editar, pesquisar e utilizar offline.
+
+O projeto deverá preservar o máximo possível das informações textuais originais, inclusive títulos, subtítulos, descrições, categorias disponíveis, referências, links, identificadores, caminhos e redirecionamentos.
+
+Não transformar a biblioteca inteira em um texto desorganizado.
+
+A organização original deverá ser preservada e reconstruída em uma estrutura Markdown lógica e navegável.
+
+2. PLATAFORMA E TECNOLOGIAS
+
+Desenvolver prioritariamente um aplicativo Android nativo.
+
+Tecnologias preferenciais:
+
+- Kotlin.
+- Jetpack Compose.
+- Android Studio.
+- Android SDK.
+- Android NDK.
+- C++ para integração nativa.
+- JNI para comunicação entre Kotlin e C++.
+- libzim oficial para leitura dos arquivos ZIM.
+- Parser HTML compatível com HTML5.
+- Conversor HTML para Markdown.
+- CommonMark.
+- GitHub Flavored Markdown (GFM).
+- SQLite FTS5 para pesquisa interna, quando disponível.
+- Storage Access Framework para seleção e gravação de arquivos.
+- UTF-8 para todos os documentos gerados.
+
+Verificar a compatibilidade real da libzim com o ambiente Android escolhido antes de iniciar sua integração.
+
+Utilizar APIs oficiais e documentadas sempre que possível.
+
+Não criar leitores ZIM improvisados caso a biblioteca oficial consiga fornecer as informações necessárias.
+
+A arquitetura deverá permitir futura expansão para Windows, Linux e macOS.
+
+3. FUNCIONAMENTO 100% LOCAL
+
+Todos os processos deverão acontecer localmente no dispositivo.
+
+Não utilizar:
+
+- Servidores externos.
+- Conversores online.
+- APIs remotas.
+- Serviços de nuvem.
+- Processamento remoto.
+- Envio de documentos para terceiros.
+- Dependências de conexão com a internet.
+
+O usuário deverá conseguir selecionar um arquivo ZIM, realizar sua conversão completa e salvar a biblioteca Markdown sem conexão com a internet.
+
+Não exigir conexão para:
+
+- Abrir o ZIM.
+- Ler as entradas.
+- Converter HTML.
+- Gerar Markdown.
+- Resolver redirecionamentos.
+- Converter links.
+- Criar índices.
+- Pesquisar documentos.
+- Exportar arquivos.
+- Validar o resultado.
+
+O aplicativo poderá utilizar bibliotecas e dependências incorporadas durante sua compilação, mas não deverá precisar baixar componentes durante a conversão.
+
+4. SELEÇÃO E ANÁLISE DO ARQUIVO ZIM
+
+Criar uma tela profissional para selecionar arquivos ".zim" armazenados no dispositivo.
+
+Utilizar o seletor de arquivos do Android, permitindo escolher arquivos em diferentes diretórios e provedores de armazenamento compatíveis.
+
+Depois da seleção, executar uma inspeção preliminar.
+
+Identificar:
+
+- Nome do arquivo.
+- Caminho acessível.
+- Tamanho.
+- Título da biblioteca.
+- Descrição.
+- Idioma.
+- Editor.
+- Publicador.
+- Criador.
+- Data, quando disponível.
+- Identificador UUID.
+- Quantidade de entradas.
+- Quantidade de artigos.
+- Quantidade de redirecionamentos.
+- Quantidade de recursos textuais.
+- Quantidade de recursos não textuais.
+- Índice de títulos.
+- Índice de pesquisa.
+- Página principal.
+- Integridade estrutural.
+
+Todos os campos deverão ser extraídos do ZIM quando disponíveis.
+
+Não inventar informações inexistentes.
+
+Apresentar uma tela de inspeção antes de iniciar o processamento.
+
+5. MECANISMO DE LEITURA E FILTRAGEM TEXTUAL
+
+Desenvolver um leitor capaz de percorrer todas as entradas de usuário disponíveis no arquivo ZIM.
+
+A primeira etapa será identificar o conteúdo de cada entrada, sua natureza e seu MIME type.
+
+Em seguida, classificar os itens.
+
+Conteúdos elegíveis para conversão
+
+- Artigos HTML.
+- Páginas XHTML.
+- Textos HTML.
+- Arquivos TXT.
+- Conteúdo textual simples.
+- Páginas de documentação.
+- Artigos enciclopédicos.
+- Documentos de conhecimento.
+- Textos técnicos.
+- Páginas de navegação.
+- Conteúdo XML textual, quando aplicável.
+- Outros conteúdos que possam ser interpretados com segurança como texto.
+
+Para documentos textuais que não sejam HTML, desenvolver conversores específicos quando necessário.
+
+Para PDFs, oferecer uma opção de extração do texto selecionável, sem exportar páginas como imagens. O OCR deverá ser opcional, local e desativado por padrão.
+
+Não presumir que toda entrada com determinado MIME seja necessariamente texto legível.
+
+Conteúdos que deverão ser excluídos da exportação
+
+Todos os recursos binários ou exclusivamente multimídia.
+
+Exemplos:
+
+- image/jpeg.
+- image/png.
+- image/webp.
+- image/gif.
+- image/svg+xml.
+- video/mp4.
+- video/webm.
+- audio/mpeg.
+- audio/ogg.
+- application/octet-stream.
+- Arquivos de fontes.
+- Arquivos gráficos.
+- Arquivos de estilo.
+- Arquivos de execução.
+- Outros tipos não textuais.
+
+A classificação deverá considerar o MIME type, a assinatura real do conteúdo quando necessário e a possibilidade de interpretação textual.
+
+Não confiar exclusivamente na extensão do arquivo.
+
+Regra de segurança
+
+Os conteúdos classificados como não textuais não deverão ser completamente extraídos para o diretório de saída.
+
+O sistema poderá consultar informações mínimas necessárias para classificá-los, identificar seus nomes, caminhos e relacionamentos, mas não deverá criar cópias desses arquivos.
+
+6. CONVERSÃO HTML PARA MARKDOWN
+
+Criar um mecanismo robusto de conversão semântica.
+
+Cada artigo HTML deverá se tornar um documento Markdown independente, quando estiver selecionado o modo de biblioteca organizada.
+
+Converter corretamente os seguintes elementos:
+
+Elemento original| Conversão
+H1| # Título
+H2| ## Subtítulo
+H3| ### Seção
+H4| #### Subseção
+H5| ##### Título
+H6| ###### Título
+P| Parágrafo
+STRONG| Negrito
+B| Negrito
+EM| Itálico
+I| Itálico
+DEL| /Tachado/
+UL| Lista não ordenada
+OL| Lista numerada
+LI| Item de lista
+BLOCKQUOTE| Citação
+PRE| Bloco de código
+CODE| Código
+A| Hiperlink
+TABLE| Tabela Markdown
+TR| Linha de tabela
+TH| Cabeçalho
+TD| Célula
+HR| Separador
+SUP| Representação compatível
+SUB| Representação compatível
+
+Preservar também:
+
+- Parágrafos.
+- Quebras de linha.
+- Listas aninhadas.
+- Tabelas.
+- Notas de rodapé.
+- Referências.
+- Citações.
+- Fórmulas matemáticas.
+- Símbolos especiais.
+- Caracteres Unicode.
+- Acentuação.
+- Equações.
+- Blocos de programação.
+- Exemplos técnicos.
+- Textos de advertência.
+- Legendas textuais.
+- Informações bibliográficas.
+
+Utilizar HTML inline somente quando não houver uma representação Markdown adequada.
+
+O objetivo é preservar a informação e a leitura, não reproduzir visualmente uma página HTML.
+
+Não alterar o significado dos textos.
+
+Não remover parágrafos automaticamente.
+
+Não duplicar textos devido a elementos aninhados.
+
+Não inverter a ordem dos conteúdos.
+
+Não converter elementos semânticos em texto genérico sem necessidade.
+
+7. TRATAMENTO ESPECIAL DE ELEMENTOS MULTIMÍDIA
+
+Esta função deverá ser rigorosamente implementada.
+
+Ao encontrar conteúdo multimídia dentro de um artigo, o aplicativo deverá excluir o arquivo e preservar somente as informações textuais relevantes.
+
+Imagens
+
+Ao encontrar:
+
+- IMG.
+- PICTURE.
+- SOURCE.
+- FIGURE.
+- SVG.
+- CANVAS.
+
+Não exportar a imagem ou o conteúdo gráfico.
+
+Preservar, quando disponíveis:
+
+- Texto ALT.
+- Descrição textual.
+- Título da figura.
+- Legenda.
+- Créditos textuais.
+- Referências textuais.
+
+Exemplo:
+
+HTML original:
+
+<figure>
+  <img src="imagem.jpg" alt="Mapa do Brasil">
+  <figcaption>Mapa político do Brasil.</figcaption>
+</figure>
+
+Resultado Markdown:
+
+> [Imagem não exportada: Mapa do Brasil]
+>
+> Legenda: Mapa político do Brasil.
+
+Se não houver descrição ou legenda, não criar textos fictícios.
+
+Oferecer uma configuração para remover completamente os marcadores de imagens, mantendo apenas os textos que já existiam no artigo.
+
+Vídeos
+
+Remover o arquivo de vídeo e preservar:
+
+- Título.
+- Descrição.
+- Legenda textual.
+- Transcrição já existente.
+- Informações relevantes em texto.
+
+Exemplo:
+
+> [Vídeo não exportado: Introdução ao assunto]
+
+Áudios
+
+Remover os arquivos de áudio e preservar:
+
+- Título.
+- Descrição.
+- Transcrição original, quando disponível.
+- Legendas.
+- Informações textuais relacionadas.
+
+Não executar reconhecimento de voz automaticamente.
+
+Arquivos de mídia sem legenda
+
+Registrar a ocorrência no relatório de exclusões, sem adicionar informações inventadas ao artigo.
+
+JavaScript, CSS e fontes
+
+Não copiar nem executar esses arquivos.
+
+Remover as dependências visuais e de execução da página, mantendo exclusivamente o conteúdo textual legível.
+
+8. PRESERVAÇÃO DA ORGANIZAÇÃO ORIGINAL
+
+Criar um mecanismo inteligente de reconstrução da estrutura das bibliotecas ZIM.
+
+O resultado deverá manter a organização lógica original.
+
+Preservar, quando disponíveis:
+
+- Caminhos originais.
+- Hierarquia de diretórios.
+- Categorias.
+- Seções.
+- Agrupamentos.
+- Identificadores.
+- Títulos.
+- Relações entre documentos.
+- Página inicial.
+- Ordem de navegação.
+
+Não presumir que todos os arquivos ZIM utilizam exatamente a mesma organização.
+
+Inspecionar namespaces, caminhos, metadados e informações de cada entrada.
+
+Não inventar categorias que não existam na fonte.
+
+Quando não houver categorias explícitas, manter a estrutura de caminhos original e identificar claramente qualquer organização adicional criada pelo aplicativo.
+
+Estrutura padrão da biblioteca
+
+Exemplo:
+
+Biblioteca_Markdown/
+│
+├── README.md
+├── INDEX.md
+├── HOME.md
+├── METADATA.md
+├── MANIFEST.md
+├── REDIRECTS.md
+├── LINKS.md
+├── EXCLUDED_CONTENT.md
+├── CONVERSION_REPORT.md
+├── ERRORS.md
+├── WARNINGS.md
+│
+├── articles/
+│   ├── categoria_01/
+│   │   ├── artigo_001.md
+│   │   ├── artigo_002.md
+│   │   └── artigo_003.md
+│   │
+│   ├── categoria_02/
+│   │   ├── artigo_004.md
+│   │   └── artigo_005.md
+│   │
+│   └── outros/
+│       └── documento.md
+│
+├── redirects/
+│   ├── alias_001.md
+│   └── alias_002.md
+│
+└── indexes/
+    ├── INDEX_BY_TITLE.md
+    ├── INDEX_BY_CATEGORY.md
+    ├── INDEX_BY_PATH.md
+    └── INDEX_BY_RELATIONSHIP.md
+
+Todos os arquivos exportados nessa configuração deverão ter extensão ".md".
+
+Não criar diretórios de mídia.
+
+Não criar diretórios contendo recursos binários.
+
+Não colocar arquivos JSON, banco SQLite, CSS ou JavaScript no pacote exportado no modo Markdown exclusivamente textual.
+
+Os bancos de dados utilizados internamente pelo aplicativo não fazem parte da biblioteca exportada.
+
+9. SISTEMA DE REDIRECIONAMENTOS
+
+Esta é uma das funcionalidades mais importantes do projeto.
+
+Preservar todos os redirecionamentos existentes no arquivo ZIM, incluindo aliases, nomes alternativos e cadeias de redirecionamento.
+
+Consultar o destino real das entradas utilizando os recursos próprios da biblioteca de leitura.
+
+Para cada redirecionamento, identificar:
+
+- Título original.
+- Caminho original.
+- Destino imediato.
+- Destino final.
+- Título do destino.
+- Caminho Markdown correspondente.
+- Quantidade de etapas.
+- Estado da resolução.
+- Possíveis ciclos.
+- Destinos inexistentes.
+
+Exemplo
+
+Origem:
+
+A/Linux
+
+Primeiro destino:
+
+A/GNU_Linux
+
+Segundo destino:
+
+A/Sistema_Operacional
+
+Destino final:
+
+A/Sistema_Operacional
+
+Resultado:
+
+Arquivo "redirects/Linux.md":
+
+---
+title: "Linux"
+type: "redirect"
+original_path: "A/Linux"
+redirect_target: "../articles/Sistema_Operacional.md"
+---
+
+# Linux
+
+Este documento é um redirecionamento para outro artigo.
+
+[Acessar o artigo original](../articles/Sistema_Operacional.md)
+
+Criar um documento Markdown próprio para cada alias, quando configurado.
+
+Não juntar todos os aliases em um único artigo.
+
+Requisitos especiais
+
+- Preservar redirecionamentos em cadeia.
+- Preservar a relação entre origem e destino imediato.
+- Registrar o destino final.
+- Detectar ciclos.
+- Detectar autorreferências.
+- Detectar destinos ausentes.
+- Não eliminar aliases.
+- Não perder nomes alternativos.
+- Evitar duplicações.
+- Preservar caminhos originais.
+- Gerar links locais.
+- Preservar o relacionamento mesmo que o destino não possa ser convertido.
+
+Se o destino for uma imagem, vídeo ou outro recurso excluído, registrar que o destino não possui representação exportada.
+
+Não criar um link Markdown quebrado.
+
+Gerar um aviso explicando que o redirecionamento aponta para um recurso não textual que não faz parte da biblioteca final.
+
+Navegação dos redirecionamentos
+
+Criar um mecanismo próprio de navegação no leitor interno do aplicativo.
+
+O mecanismo deverá consultar o arquivo "REDIRECTS.md" ou seus registros internos para encontrar o destino correto.
+
+O sistema deverá permitir abrir um alias e chegar ao documento original sem depender de internet.
+
+10. SISTEMA DE LINKS INTERNOS
+
+Converter os links internos existentes no ZIM para referências relativas entre documentos Markdown.
+
+Exemplo:
+
+Original:
+
+<a href="../A/Historia">História</a>
+
+Resultado:
+
+[História](../articles/Historia.md)
+
+Resolver os links considerando:
+
+- Caminho original.
+- Caminho de origem.
+- Caminho de destino.
+- Título.
+- Namespace.
+- Caracteres especiais.
+- Espaços.
+- Acentos.
+- Codificação URL.
+- Parâmetros de consulta.
+- Fragmentos.
+- Redirecionamentos.
+
+Não utilizar a internet para resolver links internos.
+
+Não gerar links que apontem para documentos inexistentes.
+
+Links internos para conteúdos textuais
+
+Converter normalmente para arquivos Markdown.
+
+Links internos para mídias excluídas
+
+Preservar o texto do link, mas remover o destino clicável quando o arquivo não existir no pacote.
+
+Exemplo:
+
+Original:
+
+<a href="audio.mp3">Ouvir gravação</a>
+
+Resultado:
+
+Ouvir gravação [áudio não exportado].
+
+O texto original do link deverá permanecer disponível.
+
+Links externos
+
+Preservar os endereços originais.
+
+Exemplo:
+
+[Documentação oficial](https://exemplo.com)
+
+Não baixar o conteúdo externo.
+
+Âncoras
+
+Preservar referências a seções específicas.
+
+Exemplo:
+
+[Consultar capítulo](../articles/historia.md#segunda-guerra-mundial)
+
+Criar um mapeamento entre IDs HTML originais e âncoras Markdown.
+
+Tratar títulos duplicados, acentos e identificadores personalizados.
+
+Quando não for possível reconstruir exatamente uma âncora, registrar a ocorrência no relatório.
+
+11. METADADOS E INFORMAÇÕES DE ORIGEM
+
+Todos os metadados relevantes deverão ser preservados em documentos Markdown.
+
+Criar o arquivo:
+
+"METADATA.md"
+
+Incluir:
+
+- Título da biblioteca.
+- Descrição.
+- Idioma.
+- Publicador.
+- Criador.
+- Data.
+- UUID.
+- Nome original do arquivo.
+- Tamanho original.
+- Identificadores disponíveis.
+- Informações da página principal.
+- Informações de indexação.
+- Data da conversão.
+- Versão do aplicativo conversor.
+- Configurações utilizadas.
+
+Não inventar informações que não existam.
+
+YAML Front Matter
+
+Cada documento Markdown deverá conter metadados estruturados no início.
+
+Exemplo:
+
+---
+title: "Título original"
+description: "Descrição original"
+language: "por"
+source_format: "ZIM"
+source_path: "A/Artigo"
+source_title: "Título original do artigo"
+source_mime: "text/html"
+conversion_format: "Markdown"
+conversion_status: "success"
+---
+
+# Título original
+
+Conteúdo do artigo...
+
+Preservar informações necessárias para identificar a origem de cada documento.
+
+O YAML deverá ser serializado corretamente.
+
+Evitar problemas com:
+
+- Aspas.
+- Acentos.
+- Caracteres especiais.
+- Quebras de linha.
+- Valores nulos.
+- Marcadores Markdown.
+- Textos multilíngues.
+
+12. ÍNDICES E NAVEGAÇÃO
+
+Reconstruir os índices de forma textual.
+
+Criar:
+
+INDEX.md
+
+- Índice geral.
+- Lista de categorias.
+- Lista de artigos.
+- Links para documentos.
+
+HOME.md
+
+- Página principal da biblioteca.
+- Resumo dos conteúdos.
+- Atalhos para as principais seções.
+
+INDEX_BY_TITLE.md
+
+- Artigos organizados alfabeticamente.
+
+INDEX_BY_CATEGORY.md
+
+- Artigos organizados por categoria.
+
+INDEX_BY_PATH.md
+
+- Caminhos originais e respectivos arquivos Markdown.
+
+INDEX_BY_RELATIONSHIP.md
+
+- Artigos relacionados.
+- Referências cruzadas.
+- Relações entre documentos.
+
+REDIRECTS.md
+
+- Todos os redirecionamentos.
+- Aliases.
+- Destinos imediatos.
+- Destinos finais.
+- Estado de resolução.
+
+LINKS.md
+
+- Relações de links internos.
+- Links externos.
+- Links para recursos excluídos.
+- Referências inválidas.
+
+Todos esses índices deverão ser arquivos ".md".
+
+Não exportar índices JSON no modo exclusivamente Markdown.
+
+13. SISTEMA DE PESQUISA
+
+Criar uma pesquisa interna que funcione completamente offline.
+
+Permitir localizar documentos por:
+
+- Título.
+- Subtítulo.
+- Palavra.
+- Expressão.
+- Trecho.
+- Categoria.
+- Caminho original.
+- Nome alternativo.
+- Alias.
+- Texto de metadados.
+
+Implementar:
+
+- Pesquisa instantânea.
+- Pesquisa de texto completo.
+- Pesquisa sem distinção de maiúsculas e minúsculas.
+- Tratamento de acentos.
+- Resultados com trechos relevantes.
+- Navegação até o documento.
+- Filtros por categoria.
+- Ordenação alfabética.
+- Pesquisa por aliases.
+
+Utilizar SQLite FTS5 internamente, quando disponível, ou mecanismo local equivalente.
+
+O índice de pesquisa poderá ser mantido no armazenamento privado do aplicativo, sem precisar ser exportado junto à biblioteca.
+
+Criar uma opção para reconstruir a pesquisa a partir dos documentos Markdown exportados.
+
+14. FORMAS DE EXPORTAÇÃO
+
+Criar diferentes modalidades.
+
+Modo A — Biblioteca Markdown organizada
+
+Opção padrão.
+
+Criar uma pasta com documentos ".md" individuais, preservando caminhos, artigos, categorias, índices e redirecionamentos.
+
+É o modo recomendado para bibliotecas grandes.
+
+Modo B — Arquivo Markdown único
+
+Reunir todos os documentos textuais em um único ".md".
+
+Organizar o documento por:
+
+- Título.
+- Categorias.
+- Seções.
+- Subtítulos.
+- Artigos.
+- Conteúdos relacionados.
+
+Inserir separadores claros entre os artigos.
+
+Exemplo:
+
+# BIBLIOTECA COMPLETA
+
+## Categoria 01
+
+### Artigo 001
+
+Conteúdo...
+
+---
+
+### Artigo 002
+
+Conteúdo...
+
+---
+
+## Categoria 02
+
+### Artigo 003
+
+Conteúdo...
+
+Não perder a identificação dos artigos originais durante a união.
+
+Preservar links internos utilizando âncoras locais quando possível.
+
+Criar identificadores exclusivos para títulos repetidos.
+
+Modo C — Markdown dividido por categorias
+
+Criar um arquivo ".md" por categoria, mantendo os artigos organizados em seções.
+
+Modo D — Markdown otimizado
+
+Gerar uma biblioteca com o menor tamanho textual possível, removendo espaços excessivos, marcações desnecessárias e elementos de formatação redundantes, sem remover informações relevantes.
+
+Modo E — Conversão personalizada
+
+Permitir ao usuário selecionar quais conteúdos textuais serão convertidos.
+
+O modo exclusivamente Markdown não deverá incluir mídias em nenhum desses formatos.
+
+15. ARQUIVOS DE CONTROLE E RELATÓRIOS
+
+Todos os relatórios exportados deverão ser Markdown.
+
+Criar:
+
+"MANIFEST.md"
+
+Lista de documentos convertidos, seus títulos e caminhos originais.
+
+"EXCLUDED_CONTENT.md"
+
+Lista de mídias e conteúdos não textuais identificados e deliberadamente excluídos.
+
+Registrar, quando disponível:
+
+- Caminho original.
+- Nome.
+- Tipo MIME.
+- Tamanho.
+- Documento que fazia referência ao conteúdo.
+- Motivo da exclusão.
+
+Não copiar o conteúdo binário para gerar esse relatório.
+
+"CONVERSION_REPORT.md"
+
+Relatório da operação.
+
+"ERRORS.md"
+
+Falhas de processamento.
+
+"WARNINGS.md"
+
+Limitações e avisos.
+
+"REDIRECTS.md"
+
+Redirecionamentos.
+
+"LINKS.md"
+
+Relacionamentos.
+
+Todos os relatórios deverão ser legíveis, pesquisáveis e editáveis como texto.
+
+16. CONFIGURAÇÕES AVANÇADAS
+
+Criar uma central completa de configurações.
+
+Conversão de conteúdo
+
+- CommonMark.
+- GitHub Flavored Markdown.
+- Converter HTML.
+- Converter XHTML.
+- Converter TXT.
+- Converter documentos XML textuais.
+- Extrair texto de PDFs, quando habilitado.
+- Preservar títulos.
+- Preservar subtítulos.
+- Preservar notas de rodapé.
+- Preservar tabelas.
+- Preservar fórmulas.
+- Preservar blocos de código.
+- Preservar referências.
+- Preservar listas.
+- Preservar citações.
+
+Tratamento de mídias
+
+- Excluir todas as mídias.
+- Preservar ALT.
+- Preservar legendas.
+- Preservar descrições textuais.
+- Preservar transcrições existentes.
+- Inserir marcadores de mídia não exportada.
+- Remover completamente os marcadores.
+- Registrar mídias excluídas no relatório.
+
+O padrão deverá ser excluir todos os binários e preservar as informações textuais disponíveis.
+
+Organização
+
+- Preservar hierarquia original.
+- Preservar caminhos.
+- Preservar nomes originais nos metadados.
+- Organizar por categorias identificadas.
+- Criar índice alfabético.
+- Criar índice geral.
+- Criar índice por categoria.
+- Criar índices de relacionamentos.
+- Preservar ordem original quando identificável.
+
+Redirecionamentos
+
+- Preservar todos os aliases.
+- Gerar arquivos Markdown individuais.
+- Resolver cadeias.
+- Preservar destino imediato.
+- Registrar destino final.
+- Detectar ciclos.
+- Detectar destinos inválidos.
+- Gerar relatório de redirecionamentos.
+
+Links
+
+- Converter links internos.
+- Preservar links externos.
+- Preservar âncoras.
+- Remover links para mídias excluídas.
+- Preservar o texto original dos links.
+- Identificar links quebrados.
+
+Exportação
+
+- Biblioteca com vários MD.
+- Arquivo MD único.
+- Arquivos divididos por categoria.
+- ZIP.
+- ZIP64.
+- Pasta de destino.
+- Nome personalizado.
+- Estrutura de diretórios personalizada.
+
+No modo exclusivamente Markdown, o ZIP deverá conter somente arquivos ".md".
+
+Desempenho
+
+- Paralelismo.
+- Limite de memória.
+- Tamanho dos buffers.
+- Diretório temporário.
+- Frequência de gravação.
+- Frequência de atualização do progresso.
+- Retomada automática.
+- Verificação de integridade.
+
+Todas as configurações deverão funcionar efetivamente.
+
+17. DESEMPENHO COM ARQUIVOS ZIM GRANDES
+
+Implementar o sistema considerando arquivos de vários gigabytes e bibliotecas com milhões de elementos ou grandes quantidades de artigos, conforme a capacidade real do dispositivo.
+
+Requisitos:
+
+- Leitura progressiva.
+- Processamento por entrada.
+- Conversão incremental.
+- Escrita imediata.
+- Liberação periódica de memória.
+- Processamento por lotes.
+- Cache controlado.
+- Controle de tarefas paralelas.
+- Evitar carregamento integral do ZIM na RAM.
+- Evitar carregamento de todos os artigos simultaneamente.
+- Evitar alocações desnecessárias.
+- Monitorar armazenamento disponível.
+
+Como as mídias não serão exportadas, o sistema deverá evitar operações desnecessárias de leitura e gravação de grandes arquivos binários.
+
+Criar uma estimativa do tamanho textual final.
+
+Apresentar a estimativa de espaço necessário antes da conversão.
+
+Não prometer um tamanho final exato antes de processar o conteúdo.
+
+18. SISTEMA DE RETOMADA
+
+Implementar um gerenciador de tarefas persistente.
+
+Se o usuário fechar o aplicativo, reiniciar o dispositivo ou ocorrer uma interrupção, permitir retomar a conversão.
+
+Registrar:
+
+- Identificador da tarefa.
+- Arquivo original.
+- Configuração utilizada.
+- Entradas identificadas.
+- Entradas convertidas.
+- Entradas pendentes.
+- Arquivos criados.
+- Redirecionamentos analisados.
+- Links analisados.
+- Falhas.
+- Último ponto concluído.
+
+Ao retomar, conferir os arquivos existentes e evitar duplicações.
+
+Não alterar o arquivo ZIM original.
+
+Utilizar gravação temporária e renomeação segura dos documentos Markdown quando possível.
+
+Permitir cancelar ou pausar operações sem comprometer os resultados já concluídos.
+
+19. INTERFACE UX/UI
+
+Criar uma interface moderna, profissional e intuitiva.
+
+Priorizar a facilidade de utilização, mesmo para usuários que não conhecem o formato ZIM ou Markdown.
+
+Tela inicial
+
+Mostrar:
+
+- Nome do aplicativo.
+- Botão selecionar arquivo ZIM.
+- Botão histórico.
+- Botão configurações.
+- Últimas conversões.
+- Espaço de armazenamento disponível.
+
+Tela de análise
+
+Mostrar:
+
+- Dados da biblioteca.
+- Quantidade de artigos.
+- Quantidade de redirecionamentos.
+- Quantidade de entradas textuais.
+- Quantidade de elementos não textuais.
+- Estimativa de resultado.
+- Página inicial identificada.
+
+Tela de configuração
+
+Separar configurações em grupos bem definidos:
+
+- Formato.
+- Conteúdo.
+- Organização.
+- Links.
+- Redirecionamentos.
+- Exclusão de mídias.
+- Índices.
+- Exportação.
+- Desempenho.
+
+Apresentar opções básicas e avançadas.
+
+Tela de conversão
+
+Exibir:
+
+- Progresso geral.
+- Artigos processados.
+- Artigos convertidos.
+- Redirecionamentos identificados.
+- Redirecionamentos resolvidos.
+- Links convertidos.
+- Links inválidos.
+- Conteúdos excluídos.
+- Arquivos Markdown criados.
+- Espaço ocupado.
+- Tempo decorrido.
+
+Criar registro de eventos em tempo real.
+
+Não utilizar animações que simulem processamento.
+
+Os indicadores deverão refletir o trabalho real.
+
+Tela de conclusão
+
+Exibir os resultados verdadeiros.
+
+Disponibilizar:
+
+- Abrir biblioteca.
+- Visualizar índice.
+- Abrir relatório.
+- Pesquisar documentos.
+- Exportar ZIP.
+- Compartilhar resultado.
+- Iniciar nova conversão.
+
+20. VISUALIZADOR MARKDOWN INTEGRADO
+
+Criar um navegador interno para as bibliotecas convertidas.
+
+Permitir:
+
+- Abrir arquivos Markdown.
+- Navegar por diretórios.
+- Visualizar categorias.
+- Abrir índices.
+- Seguir links internos.
+- Resolver redirecionamentos.
+- Consultar metadados.
+- Pesquisar documentos.
+- Navegar por artigos relacionados.
+- Consultar caminhos originais.
+
+O navegador deverá funcionar offline.
+
+Os links deverão ser resolvidos através do mapeamento criado durante a conversão.
+
+O usuário deverá poder acessar um documento utilizando seu título original ou qualquer um de seus aliases registrados.
+
+Não depender de servidores HTTP externos.
+
+21. PROTEÇÃO CONTRA PERDA DE DADOS
+
+O arquivo ZIM original deverá ser tratado como somente leitura.
+
+Não modificar o conteúdo original.
+
+Implementar proteção contra:
+
+- Arquivos inválidos.
+- Arquivos corrompidos.
+- Erros de leitura.
+- Nomes duplicados.
+- Colisões de caminhos.
+- Caracteres proibidos.
+- Path traversal.
+- Diretórios não autorizados.
+- Falhas de gravação.
+- Falta de armazenamento.
+- Falhas de memória.
+- Interrupções inesperadas.
+
+Todos os arquivos Markdown deverão ser gravados de maneira segura.
+
+Preservar a identificação dos conteúdos originais mesmo quando for necessário modificar seus nomes físicos.
+
+22. AUDITORIA E VALIDAÇÃO
+
+Criar uma auditoria completa do processo.
+
+Comparar o inventário original com a biblioteca textual gerada.
+
+Verificar:
+
+- Entradas identificadas.
+- Entradas textuais convertidas.
+- Entradas excluídas por serem mídias.
+- Conteúdos textuais não suportados.
+- Artigos ausentes.
+- Duplicações.
+- Redirecionamentos preservados.
+- Cadeias resolvidas.
+- Links internos convertidos.
+- Links inválidos.
+- Âncoras preservadas.
+- Metadados preservados.
+- Integridade dos arquivos Markdown.
+- Consistência dos índices.
+
+Apresentar estatísticas separadas para conversão textual e exclusão de mídias.
+
+Não contabilizar uma imagem excluída intencionalmente como erro de conversão.
+
+Não considerar uma mídia excluída como artigo convertido.
+
+Diferenciar claramente:
+
+- Convertido com sucesso.
+- Convertido parcialmente.
+- Preservado como referência textual.
+- Excluído intencionalmente.
+- Não suportado.
+- Falha na leitura.
+- Falha na conversão.
+- Falha na gravação.
+- Destino inexistente.
+
+O percentual de conclusão deverá representar os resultados reais, sem falsificar indicadores.
+
+23. TESTES AUTOMATIZADOS
+
+Criar um conjunto de testes reais e automatizados.
+
+Testar:
+
+- ZIM pequeno.
+- ZIM grande.
+- ZIM com milhares de artigos.
+- ZIM sem imagens.
+- ZIM com muitas imagens.
+- ZIM com vídeos e áudios.
+- ZIM com muitos redirecionamentos.
+- ZIM com cadeias de redirecionamentos.
+- ZIM com redirecionamentos inválidos.
+- ZIM com muitos links internos.
+- ZIM com links externos.
+- ZIM com tabelas complexas.
+- ZIM com fórmulas matemáticas.
+- ZIM multilíngue.
+- ZIM com acentos.
+- ZIM com caracteres Unicode.
+- ZIM com títulos duplicados.
+- ZIM com namespaces diferentes.
+- ZIM com arquivos HTML complexos.
+- ZIM parcialmente corrompido.
+
+Criar verificações específicas para garantir:
+
+1. Nenhum arquivo de mídia foi exportado.
+2. Nenhum artigo textual elegível foi perdido silenciosamente.
+3. Todos os redirecionamentos foram inventariados.
+4. Os links internos apontam para destinos corretos.
+5. Os artigos mantêm os respectivos caminhos de origem nos metadados.
+6. Os documentos podem ser abertos em leitores Markdown comuns.
+7. O pacote ZIP contém exclusivamente documentos Markdown.
+8. O arquivo original permanece intacto.
+9. A retomada não duplica documentos.
+10. A pesquisa encontra os documentos convertidos.
+
+24. ORGANIZAÇÃO DO CÓDIGO-FONTE
+
+Separar o projeto em módulos independentes.
+
+ZIM Reader
+
+- Abertura.
+- Leitura.
+- Metadados.
+- Entradas.
+- Redirecionamentos.
+
+Text Filter
+
+- Identificação MIME.
+- Classificação textual.
+- Classificação de mídias.
+- Exclusão de recursos não textuais.
+
+HTML Parser
+
+- Interpretação HTML.
+- Estrutura semântica.
+- Extração dos textos.
+- Identificação de links.
+
+Markdown Converter
+
+- Conversão.
+- Formatação.
+- Estrutura.
+- Front Matter.
+
+Link Resolver
+
+- Links relativos.
+- Links internos.
+- Âncoras.
+- Links externos.
+- Redirecionamentos.
+
+Redirect Manager
+
+- Aliases.
+- Destinos imediatos.
+- Destinos finais.
+- Ciclos.
+- Mapeamento.
+
+Metadata Manager
+
+- Metadados.
+- Organização.
+- Identificação da origem.
+
+Index Manager
+
+- Índices.
+- Categorias.
+- Títulos.
+- Relacionamentos.
+
+Search Engine
+
+- Pesquisa local.
+- Indexação.
+- Resultados.
+
+Export Manager
+
+- Pastas.
+- Markdown único.
+- ZIP.
+- ZIP64.
+
+Validator
+
+- Auditoria.
+- Integridade.
+- Comparação.
+- Relatórios.
+
+Task Manager
+
+- Progresso.
+- Retomada.
+- Cancelamento.
+- Histórico.
+
+User Interface
+
+- Navegação.
+- Configurações.
+- Pré-visualização.
+- Resultados.
+
+Não misturar as funcionalidades da interface com o mecanismo de processamento.
+
+25. CRITÉRIOS DE ACEITAÇÃO
+
+O aplicativo deverá ser considerado funcional somente quando conseguir:
+
+1. Selecionar um arquivo ZIM.
+2. Abrir e inspecionar o arquivo.
+3. Inventariar suas entradas.
+4. Identificar corretamente conteúdos textuais e não textuais.
+5. Converter artigos HTML para Markdown.
+6. Preservar títulos e subtítulos.
+7. Preservar tabelas e listas.
+8. Preservar acentuação e Unicode.
+9. Preservar metadados.
+10. Preservar a hierarquia da biblioteca.
+11. Preservar os caminhos originais.
+12. Converter links internos.
+13. Preservar links externos.
+14. Preservar âncoras.
+15. Reconstruir todos os redirecionamentos.
+16. Detectar ciclos.
+17. Gerar índices Markdown.
+18. Gerar relatórios Markdown.
+19. Excluir todas as mídias.
+20. Não exportar arquivos binários.
+21. Gerar uma biblioteca organizada.
+22. Gerar um Markdown único, quando selecionado.
+23. Criar ZIP exclusivamente textual.
+24. Permitir pesquisa offline.
+25. Permitir retomada de conversões.
+26. Validar os documentos gerados.
+27. Funcionar sem conexão com a internet.
+28. Não modificar o arquivo de origem.
+
+26. RESULTADO FINAL DO DESENVOLVIMENTO
+
+Entregar um produto real, completo e funcional.
+
+Entregáveis:
+
+- Projeto Android completo.
+- Código-fonte organizado.
+- Integração funcional com libzim.
+- Biblioteca nativa compilável.
+- Interface completa.
+- Leitor ZIM.
+- Conversor HTML para Markdown.
+- Filtro de mídias.
+- Gerenciador de links.
+- Gerenciador de redirecionamentos.
+- Reconstrução de índices.
+- Pesquisa offline.
+- Exportação.
+- Relatórios.
+- Auditoria.
+- Testes automatizados.
+- Documentação técnica.
+- Instruções para compilação.
+- APK instalável e funcional.
+
+Não apresentar apenas protótipos.
+
+Não criar botões decorativos.
+
+Não utilizar dados fictícios.
+
+Não simular conversões.
+
+Não declarar uma função pronta sem que ela tenha sido implementada e testada.
+
+Corrigir os erros de compilação, problemas de compatibilidade, permissões, armazenamento e integração nativa antes da entrega.
+
+27. ORIENTAÇÃO FINAL E PRIORIDADE ABSOLUTA
+
+Desenvolva este projeto como um software profissional de preservação e transformação de conhecimento digital.
+
+A prioridade máxima é transformar bibliotecas Kiwix/ZIM em bibliotecas Markdown exclusivamente textuais, leves, organizadas, pesquisáveis e portáteis.
+
+O aplicativo deverá preservar o conhecimento, não as mídias.
+
+Os artigos e seus relacionamentos devem continuar compreensíveis e navegáveis mesmo depois da remoção de todas as imagens, vídeos, áudios e arquivos binários.
+
+A organização não pode ser sacrificada para reduzir o tamanho.
+
+Os redirecionamentos não podem ser descartados.
+
+Os links internos não podem ser simplesmente apagados.
+
+Os metadados não podem ser perdidos.
+
+Os conteúdos textuais não podem ser agrupados aleatoriamente.
+
+A biblioteca deverá manter a identificação de cada artigo e permitir localizar seus documentos por título, categoria, caminho original e aliases.
+
+A exportação deverá ser composta somente por arquivos Markdown, sem depender de recursos externos.
+
+O aplicativo deverá oferecer duas experiências principais:
+
+1. Biblioteca Markdown organizada: vários documentos ".md", índices e redirecionamentos preservados.
+
+2. Markdown único: todos os textos reunidos em um documento organizado e pesquisável.
+
+A solução final deverá ser leve, eficiente, segura, completamente offline e capaz de converter arquivos ZIM grandes sem consumir desnecessariamente a memória do dispositivo.
+
+O objetivo é criar uma ferramenta de conversão realmente confiável, que transforme bibliotecas ZIM em arquivos Markdown puros, preservando ao máximo sua organização e seu conteúdo textual original.

@@ -1,0 +1,8 @@
+{
+  "name": "Remix 2 Syniji Zim Converter .MD",
+  "description": "Efficiently transform Zim files into organized, text-only Markdown documents while preserving internal link structures and data hierarchy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
