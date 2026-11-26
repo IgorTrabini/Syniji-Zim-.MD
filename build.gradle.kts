@@ -13,5 +13,10 @@ tasks.register<Copy>("packageApkIntoProject") {
   from(project(":app").layout.buildDirectory.file("outputs/apk/debug/app-debug.apk"))
   into(layout.projectDirectory.dir("apk"))
   rename { "Syniji-Zim-converter-MD.apk" }
+  val outApk = layout.projectDirectory.file("apk/Syniji-Zim-converter-MD.apk")
+  doLast {
+    val f = outApk.asFile
+    println("APK_PATH=${f.absolutePath} APK_BYTES=${f.length()} APK_MB=${"%.2f".format(f.length() / (1024.0 * 1024.0))}")
+  }
 }
 
