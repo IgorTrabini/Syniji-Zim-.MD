@@ -26,9 +26,10 @@ O projeto inclui toda a configuração Gradle, código-fonte Kotlin/Compose e de
 
 ```bash
 gradle :app:assembleDebug
+gradle :packageApkIntoProject
 gradle :app:assembleRelease
 gradle :app:testDebugUnitTest
 ```
 
-O APK compilado no ambiente local fica disponível em `app/build/outputs/apk/debug/app-debug.apk` (e no container de build em `.build-outputs/app-debug.apk`).
+O APK compilado e assinado fica disponível diretamente no projeto em `apk/Syniji-Zim-converter-MD.apk` (pronto para download no ZIP do projeto e envio ao repositório GitHub sincronizado), além de `app/build/outputs/apk/debug/app-debug.apk` e `.build-outputs/app-debug.apk`.
 
